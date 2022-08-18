@@ -15,12 +15,16 @@ set shiftwidth=2       " Number of auto-indent spaces
 set smartindent        " Enable smart-indent
 set smarttab           " Enable smart-tabs
 set softtabstop=2      " Number of spaces per Tab
+set tabstop=2          " Number of spaces per Tab
 
 " Advanced
 set ruler              " Show row and column ruler information
 
 set undolevels=1000    " Number of undo levels
 set backspace=indent,eol,start   " Backspace behaviour
+
+set list
+set listchars=tab:>-
 
 let mapleader = " "
 
