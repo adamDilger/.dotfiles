@@ -25,6 +25,7 @@ set backspace=indent,eol,start   " Backspace behaviour
 
 set list
 set listchars=tab:>-
+set signcolumn=yes
 
 let mapleader = " "
 
