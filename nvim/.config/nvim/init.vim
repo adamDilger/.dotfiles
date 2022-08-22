@@ -9,6 +9,7 @@ set visualbell         " Use visual bell (no beeping)
 set smartcase          " Enable smart-case search
 set ignorecase         " Always case-insensitive
 set incsearch          " Searches for strings incrementally
+set nohlsearch
 
 set autoindent         " Auto-indent new lines
 set shiftwidth=2       " Number of auto-indent spaces
