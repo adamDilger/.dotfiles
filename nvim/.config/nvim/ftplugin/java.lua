@@ -23,9 +23,9 @@ local WORKSPACE_PATH = home .. "/workspace/"
 
 if vim.fn.has("mac") == 1 then
 	CONFIG = "mac"
-	JAVA_BIN = "/Library/Java/JavaVirtualMachines/temurin-18.jdk/Contents/Home/bin/java"
+	JAVA_BIN = "/Library/Java/JavaVirtualMachines/temurin-19.jdk/Contents/Home/bin/java"
 	JAVA_11_HOME = "/Library/Java/JavaVirtualMachines/temurin-11.jdk/Contents/Home/bin/java"
-	JAVA_17_HOME = "/Library/Java/JavaVirtualMachines/temurin-18.jdk/Contents/Home/bin/java"
+	JAVA_17_HOME = "/Library/Java/JavaVirtualMachines/temurin-19.jdk/Contents/Home/bin/java"
 	FORMATTER_XML_LOCATION = home .. "/geo/geometry/standards/eclipse/GeometryFormatter.xml"
 elseif vim.fn.has("unix") == 1 then
 	CONFIG = "linux"
