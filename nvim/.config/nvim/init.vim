@@ -20,9 +20,12 @@ set tabstop=2          " Number of spaces per Tab
 
 " Advanced
 set ruler              " Show row and column ruler information
+set noswapfile         " no swap files
 
 set undolevels=1000    " Number of undo levels
 set backspace=indent,eol,start   " Backspace behaviour
+set splitbelow
+set splitright
 
 set list
 set listchars=tab:>-

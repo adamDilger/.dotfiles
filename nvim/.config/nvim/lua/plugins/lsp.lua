@@ -9,7 +9,6 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
 local on_attach = function(client, bufnr)
-	print("HELLO")
 	vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
 	-- Mappings.
@@ -37,7 +36,10 @@ local lsp_flags = {}
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 require('lspconfig')['gopls'].setup{
-	on_attach = on_attach,
+	on_attach = function(client, bufnr) 
+		on_attach(client, bufnr)
+		client.resolved_capabilities.document_formatting = false
+	end,
 	flags = lsp_flags,
 	capabilities = capabilities
 }
