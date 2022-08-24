@@ -55,7 +55,6 @@ lspconfig_configs.volar_api = {
 		},
 	}
 }
-lspconfig.volar_api.setup{}
 
 lspconfig_configs.volar_doc = {
 	default_config = {
@@ -83,7 +82,6 @@ lspconfig_configs.volar_doc = {
 		},
 	}
 }
-lspconfig.volar_doc.setup{}
 
 lspconfig_configs.volar_html = {
 	default_config = {
@@ -112,4 +110,11 @@ lspconfig_configs.volar_html = {
 		},
 	}
 }
-lspconfig.volar_html.setup{}
+
+local setupVolar = function(base_on_attach, capabilities) 
+	lspconfig.volar_api.setup{ on_attach = base_on_attach, capabilities = capabilities }
+	lspconfig.volar_doc.setup{ on_attach = base_on_attach, capabilities = capabilities }
+	lspconfig.volar_html.setup{ on_attach = base_on_attach, capabilities = capabilities }
+end
+
+return setupVolar
