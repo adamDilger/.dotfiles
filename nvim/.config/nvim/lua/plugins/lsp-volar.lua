@@ -1,37 +1,38 @@
-local lspconfig = require'lspconfig'
-local lspconfig_configs = require'lspconfig.configs'
-local lspconfig_util = require 'lspconfig.util'
+local lspconfig = require("lspconfig")
+local lspconfig_configs = require("lspconfig.configs")
+local lspconfig_util = require("lspconfig.util")
 
 local function on_new_config(new_config, new_root_dir)
 	local function get_typescript_server_path(root_dir)
 		local project_root = lspconfig_util.find_node_modules_ancestor(root_dir)
-		return project_root and (lspconfig_util.path.join(project_root, 'node_modules', 'typescript', 'lib', 'tsserverlibrary.js'))
-		or ''
+		return project_root
+				and (lspconfig_util.path.join(project_root, "node_modules", "typescript", "lib", "tsserverlibrary.js"))
+			or ""
 	end
 
 	if
 		new_config.init_options
 		and new_config.init_options.typescript
-		and new_config.init_options.typescript.serverPath == ''
+		and new_config.init_options.typescript.serverPath == ""
 	then
 		new_config.init_options.typescript.serverPath = get_typescript_server_path(new_root_dir)
 	end
 end
 
-local volar_cmd = {'vue-language-server', '--stdio'}
-local volar_root_dir = lspconfig_util.root_pattern 'package.json'
+local volar_cmd = { "vue-language-server", "--stdio" }
+local volar_root_dir = lspconfig_util.root_pattern("package.json")
 
 lspconfig_configs.volar_api = {
 	default_config = {
 		cmd = volar_cmd,
 		root_dir = volar_root_dir,
 		on_new_config = on_new_config,
-		filetypes = { 'vue'},
+		filetypes = { "vue" },
 		-- If you want to use Volar's Take Over Mode (if you know, you know)
-		filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' },
+		filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
 		init_options = {
 			typescript = {
-				serverPath = ''
+				serverPath = "",
 			},
 			languageFeatures = {
 				implementation = true, -- new in @volar/vue-language-server v0.33
@@ -46,14 +47,14 @@ lspconfig_configs.volar_api = {
 				codeAction = true,
 				workspaceSymbol = true,
 				completion = {
-					defaultTagNameCase = 'both',
-					defaultAttrNameCase = 'kebabCase',
+					defaultTagNameCase = "both",
+					defaultAttrNameCase = "kebabCase",
 					getDocumentNameCasesRequest = false,
 					getDocumentSelectionRequest = false,
 				},
-			}
+			},
 		},
-	}
+	},
 }
 
 lspconfig_configs.volar_doc = {
@@ -62,25 +63,25 @@ lspconfig_configs.volar_doc = {
 		root_dir = volar_root_dir,
 		on_new_config = on_new_config,
 
-		filetypes = { 'vue'},
+		filetypes = { "vue" },
 		-- If you want to use Volar's Take Over Mode (if you know, you know):
-		filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' },
+		filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
 		init_options = {
 			typescript = {
-				serverPath = ''
+				serverPath = "",
 			},
 			languageFeatures = {
 				implementation = true, -- new in @volar/vue-language-server v0.33
 				documentHighlight = true,
 				documentLink = true,
-				codeLens = { showReferencesNotification = true},
+				codeLens = { showReferencesNotification = true },
 				-- not supported - https://github.com/neovim/neovim/pull/15723
 				semanticTokens = false,
 				diagnostics = true,
 				schemaRequestService = true,
-			}
+			},
 		},
-	}
+	},
 }
 
 lspconfig_configs.volar_html = {
@@ -89,12 +90,12 @@ lspconfig_configs.volar_html = {
 		root_dir = volar_root_dir,
 		on_new_config = on_new_config,
 
-		filetypes = { 'vue'},
+		filetypes = { "vue" },
 		-- If you want to use Volar's Take Over Mode (if you know, you know), intentionally no 'json':
-		filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+		filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
 		init_options = {
 			typescript = {
-				serverPath = ''
+				serverPath = "",
 			},
 			documentFeatures = {
 				selectionRange = true,
@@ -106,15 +107,15 @@ lspconfig_configs.volar_html = {
 				documentFormatting = {
 					defaultPrintWidth = 100,
 				},
-			}
+			},
 		},
-	}
+	},
 }
 
-local setupVolar = function(base_on_attach, capabilities) 
-	lspconfig.volar_api.setup{ on_attach = base_on_attach, capabilities = capabilities }
-	lspconfig.volar_doc.setup{ on_attach = base_on_attach, capabilities = capabilities }
-	lspconfig.volar_html.setup{ on_attach = base_on_attach, capabilities = capabilities }
+local setupVolar = function(base_on_attach, capabilities)
+	lspconfig.volar_api.setup({ on_attach = base_on_attach, capabilities = capabilities })
+	lspconfig.volar_doc.setup({ on_attach = base_on_attach, capabilities = capabilities })
+	lspconfig.volar_html.setup({ on_attach = base_on_attach, capabilities = capabilities })
 end
 
 return setupVolar

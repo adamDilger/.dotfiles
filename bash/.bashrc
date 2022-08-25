@@ -16,12 +16,11 @@ HISTFILESIZE=
 #tty fixes for vim
 stty -ixon
 
-#git autocomplete
-[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 
 #alias
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
   alias ls="ls -lh --color=auto"
+  [ -f /usr/share/bash-completion/completions/git ] && source /usr/share/bash-completion/completions/git;
 elif [[ "$OSTYPE" == "darwin"* ]]; then
   alias ls="ls -hlG"
 fi
@@ -31,7 +30,7 @@ alias gs="git status"
 alias gt="git log --graph --decorate --oneline --all "
 alias gto="git log --graph --decorate --oneline"
 alias lg="lazygit"
-alias json='python -mjson.tool'
+alias json='python3 -mjson.tool'
 
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
@@ -52,10 +51,3 @@ findfile() { find . -name "*$1*"; }
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-export PATH="$PATH:/opt/mssql-tools/bin"
-
-
-# BEGIN_KITTY_SHELL_INTEGRATION
-if test -n "$KITTY_INSTALLATION_DIR" -a -e "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; then source "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; fi
-# END_KITTY_SHELL_INTEGRATION
