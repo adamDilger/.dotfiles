@@ -35,7 +35,7 @@ local base_on_attach = function(client, bufnr)
 	vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
 
 	-- if you want to set up formatting on save, you can use this as a callback
-	local augroup = vim.api.nvim_create_augroup("LspFormatting")
+	local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 	-- add to your shared on_attach callback
 	if client.supports_method("textDocument/formatting") then
