@@ -118,4 +118,6 @@ local setupVolar = function(base_on_attach, capabilities)
 	lspconfig.volar_html.setup({ on_attach = base_on_attach, capabilities = capabilities })
 end
 
-return setupVolar
+return {
+	setupVolar = setupVolar,
+}

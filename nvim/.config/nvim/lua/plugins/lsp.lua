@@ -28,19 +28,14 @@ local base_on_attach = function(client, bufnr)
 	vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
 	vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
 	vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, bufopts)
-	-- vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-	-- vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-	-- vim.keymap.set('n', '<space>wl', function()
-	--   print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-	-- end, bufopts)
-	vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, bufopts)
-	vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, bufopts)
-	vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, bufopts)
+	vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, bufopts)
+	vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, bufopts)
+	vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, bufopts)
+	vim.keymap.set("n", "<leader>lf", vim.lsp.buf.formatting, bufopts)
 	vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
-	vim.keymap.set("n", "<space>f", vim.lsp.buf.formatting, bufopts)
 
 	-- if you want to set up formatting on save, you can use this as a callback
-	local augroup = vim.api.nvim_create_augroup("LspFormatting", { clear = true })
+	local augroup = vim.api.nvim_create_augroup("LspFormatting")
 
 	-- add to your shared on_attach callback
 	if client.supports_method("textDocument/formatting") then
@@ -63,4 +58,4 @@ require("lspconfig")["gopls"].setup({
 	capabilities = capabilities,
 })
 
-require("plugins.lsp-volar")(base_on_attach, capabilities)
+require("plugins.lsp-volar").setupVolar(base_on_attach, capabilities)

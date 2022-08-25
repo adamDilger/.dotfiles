@@ -1,3 +1,4 @@
+require("adam.globals")
 require("adam.plugins")
 
 require("plugins.lsp")
@@ -8,3 +9,4 @@ require("plugins.nvim-tree")
 require("plugins.lualine")
 
 require("languages.go")
+require("languages.lua")
