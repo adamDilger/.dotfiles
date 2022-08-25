@@ -6,7 +6,7 @@ null_ls.setup({
 	},
 })
 
-require('dap-go').setup()
+require("dap-go").setup()
 
 local dap = require("dap")
 
@@ -42,6 +42,6 @@ dap.adapters.go = function(callback, _)
 
 	-- Wait for delve to start
 	vim.defer_fn(function()
-		callback { type = "server", host = "127.0.0.1", port = port }
+		callback({ type = "server", host = "127.0.0.1", port = port })
 	end, 100)
 end

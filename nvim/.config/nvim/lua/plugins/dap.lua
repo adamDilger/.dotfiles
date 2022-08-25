@@ -1,6 +1,5 @@
 local dap, dapui = require("dap"), require("dapui")
 
-
 local opts = { silent = true }
 vim.keymap.set("n", "<leader>dd", "<Cmd>lua require'dap'.continue()<CR>", opts)
 vim.keymap.set("n", "<leader>ds", "<Cmd>lua require'dap'.step_over()<CR>", opts)
@@ -19,11 +18,11 @@ vim.keymap.set("n", "<Leader>dl", "<Cmd>lua require'dap'.goto_()<CR>", opts)
 
 dapui.setup({})
 dap.listeners.after.event_initialized["dapui_config"] = function()
-  dapui.open()
+	dapui.open()
 end
 dap.listeners.before.event_terminated["dapui_config"] = function()
-  dapui.close()
+	dapui.close()
 end
 dap.listeners.before.event_exited["dapui_config"] = function()
-  dapui.close()
+	dapui.close()
 end
