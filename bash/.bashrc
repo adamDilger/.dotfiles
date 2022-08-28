@@ -20,7 +20,7 @@ stty -ixon
 #alias
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
   alias ls="ls -lh --color=auto"
-  [ -f /usr/share/bash-completion/completions/git ] && source /usr/share/bash-completion/completions/git;
+  [ -f /usr/share/bash-completion/bash-completion ] && source /usr/share/bash-completion/bash-completion;
 elif [[ "$OSTYPE" == "darwin"* ]]; then
   alias ls="ls -hlG"
 fi

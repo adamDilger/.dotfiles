@@ -2,6 +2,7 @@ require("mason").setup()
 
 local lsp_formatting = function(bufnr)
 	vim.lsp.buf.format({
+		timeout_ms = 2000,
 		filter = function(client)
 			-- apply whatever logic you want (in this example, we'll only use null-ls)
 			return client.name == "null-ls"
@@ -31,7 +32,9 @@ local base_on_attach = function(client, bufnr)
 	vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, bufopts)
 	vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, bufopts)
 	vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, bufopts)
-	vim.keymap.set("n", "<leader>lf", vim.lsp.buf.formatting, bufopts)
+	vim.keymap.set("n", "<leader>lf", function()
+		lsp_formatting(bufnr)
+	end, bufopts)
 	vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
 
 	-- if you want to set up formatting on save, you can use this as a callback
@@ -59,3 +62,15 @@ require("lspconfig")["gopls"].setup({
 })
 
 require("plugins.lsp-volar").setupVolar(base_on_attach, capabilities)
+
+require("lspconfig")["sumneko_lua"].setup({
+	on_attach = base_on_attach,
+	capabilities = capabilities,
+	settings = {
+		Lua = {
+			diagnostics = {
+				globals = { "vim" },
+			},
+		},
+	},
+})
