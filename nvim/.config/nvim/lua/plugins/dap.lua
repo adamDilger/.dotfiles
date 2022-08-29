@@ -1,12 +1,14 @@
 local dap, dapui = require("dap"), require("dapui")
 
+require("nvim-dap-virtual-text").setup()
+
 local opts = { silent = true }
 vim.keymap.set("n", "<leader>dd", "<Cmd>lua require'dap'.continue()<CR>", opts)
 vim.keymap.set("n", "<leader>ds", "<Cmd>lua require'dap'.step_over()<CR>", opts)
 vim.keymap.set("n", "<leader>di", "<Cmd>lua require'dap'.step_into()<CR>", opts)
 vim.keymap.set("n", "<leader>do", "<Cmd>lua require'dap'.step_out()<CR>", opts)
 vim.keymap.set("n", "<Leader>db", "<Cmd>lua require'dap'.toggle_breakpoint()<CR>", opts)
-vim.keymap.set("n", "<Leader>dl", "<Cmd>lua require'dap'.goto_()<CR>", opts)
+vim.keymap.set("n", "<Leader>dl", "<Cmd>lua require'dap'.run_to_cursor()<CR>", opts)
 -- vim.keymap.set("<Leader>dB", "<Cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>", opts)
 -- vim.keymap.set(
 -- 	"<Leader>lp",
