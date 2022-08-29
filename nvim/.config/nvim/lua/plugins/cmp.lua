@@ -20,11 +20,22 @@ cmp.setup({
 		["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 	}),
 	sources = cmp.config.sources({
-		{ name = "nvim_lsp" },
+		{ name = "nvim_lsp", max_item_count = 20 },
 		{ name = "vsnip" },
 	}, {
 		{ name = "buffer" },
 	}),
+	formatting = {
+		format = function(entry, vim_item)
+			vim_item.menu = ({
+				buffer = "[buffer]",
+				nvim_lsp = "[lsp]",
+				luasnip = "[snippet]",
+			})[entry.source.name]
+
+			return vim_item
+		end,
+	},
 })
 
 -- Set configuration for specific filetype.

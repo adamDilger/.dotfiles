@@ -1,3 +1,5 @@
+require("nvim-projectconfig").setup()
+
 require("adam.globals")
 require("adam.plugins")
 

@@ -23,6 +23,7 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
   [ -f /usr/share/bash-completion/bash-completion ] && source /usr/share/bash-completion/bash-completion;
 elif [[ "$OSTYPE" == "darwin"* ]]; then
   alias ls="ls -hlG"
+  [[ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]] && . "$(brew --prefix)/etc/profile.d/bash_completion.sh"
 fi
 
 alias grep="grep --color=auto"
@@ -31,8 +32,6 @@ alias gt="git log --graph --decorate --oneline --all "
 alias gto="git log --graph --decorate --oneline"
 alias lg="lazygit"
 alias json='python3 -mjson.tool'
-
-alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
 export EDITOR=vim
 
@@ -44,8 +43,6 @@ export EDITOR=vim
 # export FZF_DEFAULT_OPTS="--layout=reverse --height 40%"
 gc() { git branch | fzf --layout=reverse --height 40% | xargs git checkout; }
 export FZF_DEFAULT_COMMAND='rg --files --hidden'
-
-findfile() { find . -name "*$1*"; }
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 

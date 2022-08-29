@@ -19,6 +19,9 @@ vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
 vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, opts)
 
+-- not sure where this is supposed to go, this might not need to be cleared in the for loop either?
+local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+
 local base_on_attach = function(client, bufnr)
 	vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
@@ -36,9 +39,6 @@ local base_on_attach = function(client, bufnr)
 		lsp_formatting(bufnr)
 	end, bufopts)
 	vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
-
-	-- if you want to set up formatting on save, you can use this as a callback
-	local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 	-- add to your shared on_attach callback
 	if client.supports_method("textDocument/formatting") then
@@ -61,7 +61,20 @@ require("lspconfig")["gopls"].setup({
 	capabilities = capabilities,
 })
 
-require("plugins.lsp-volar").setupVolar(base_on_attach, capabilities)
+require("lspconfig")["tailwindcss"].setup({
+	on_attach = base_on_attach,
+	capabilities = capabilities,
+})
+
+-- default to volars ts server, as vue projects are more common than ts ones
+if not _LSP_SKIP_VOLAR then
+	require("plugins.lsp-volar").setupVolar(base_on_attach, capabilities)
+elseif not _LSP_SKIP_TSSERVER then
+	require("lspconfig")["tsserver"].setup({
+		on_attach = base_on_attach,
+		capabilities = capabilities,
+	})
+end
 
 require("lspconfig")["sumneko_lua"].setup({
 	on_attach = base_on_attach,

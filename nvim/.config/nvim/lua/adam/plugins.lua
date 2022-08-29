@@ -10,6 +10,8 @@ return require("packer").startup(function(use)
 		requires = { "nvim-lua/plenary.nvim" },
 	})
 
+	use("windwp/nvim-projectconfig")
+
 	use("mfussenegger/nvim-dap")
 	use("leoluz/nvim-dap-go")
 	use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
