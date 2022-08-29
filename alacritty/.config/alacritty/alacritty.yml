@@ -185,7 +185,7 @@ font:
 #draw_bold_text_with_bright_colors: false
 
 # Colors (Tomorrow Night)
-#colors:
+colors:
   # Default colors
   #primary:
   #  background: '#1d1f21'
@@ -292,10 +292,10 @@ font:
   #  white:   '#c5c8c6'
 
   # Bright colors
-  #bright:
+  bright:
   #  black:   '#666666'
-  #  red:     '#d54e53'
-  #  green:   '#b9ca4a'
+   red:     '#e63037'
+   green:   '#9ade40'
   #  yellow:  '#e7c547'
   #  blue:    '#7aa6da'
   #  magenta: '#c397d8'
