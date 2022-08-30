@@ -1,3 +1,4 @@
+_PROJECT = {}
 require("nvim-projectconfig").setup()
 
 require("adam.globals")

@@ -67,9 +67,9 @@ require("lspconfig")["tailwindcss"].setup({
 })
 
 -- default to volars ts server, as vue projects are more common than ts ones
-if not _LSP_SKIP_VOLAR then
+if not _PROJECT.LSP_SKIP_VOLAR then
 	require("plugins.lsp-volar").setupVolar(base_on_attach, capabilities)
-elseif not _LSP_SKIP_TSSERVER then
+elseif not _PROJECT.LSP_SKIP_TSSERVER then
 	require("lspconfig")["tsserver"].setup({
 		on_attach = base_on_attach,
 		capabilities = capabilities,
@@ -82,7 +82,7 @@ require("lspconfig")["sumneko_lua"].setup({
 	settings = {
 		Lua = {
 			diagnostics = {
-				globals = { "vim" },
+				globals = { "vim", "_PROJECT" },
 			},
 		},
 	},

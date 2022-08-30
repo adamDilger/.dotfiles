@@ -9,6 +9,8 @@ vim.keymap.set("n", "<leader>di", "<Cmd>lua require'dap'.step_into()<CR>", opts)
 vim.keymap.set("n", "<leader>do", "<Cmd>lua require'dap'.step_out()<CR>", opts)
 vim.keymap.set("n", "<Leader>db", "<Cmd>lua require'dap'.toggle_breakpoint()<CR>", opts)
 vim.keymap.set("n", "<Leader>dl", "<Cmd>lua require'dap'.run_to_cursor()<CR>", opts)
+vim.keymap.set("n", "<Leader>dc", "<Cmd>lua require('dap').terminate()<CR>", opts)
+
 -- vim.keymap.set("<Leader>dB", "<Cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>", opts)
 -- vim.keymap.set(
 -- 	"<Leader>lp",
@@ -21,10 +23,13 @@ vim.keymap.set("n", "<Leader>dl", "<Cmd>lua require'dap'.run_to_cursor()<CR>", o
 dapui.setup({})
 dap.listeners.after.event_initialized["dapui_config"] = function()
 	dapui.open()
+	vim.keymap.set("n", "E", "<Cmd>lua require('dapui').eval()<CR>")
 end
 dap.listeners.before.event_terminated["dapui_config"] = function()
 	dapui.close()
+	vim.keymap.del("n", "E")
 end
 dap.listeners.before.event_exited["dapui_config"] = function()
 	dapui.close()
+	vim.keymap.del("n", "E")
 end
