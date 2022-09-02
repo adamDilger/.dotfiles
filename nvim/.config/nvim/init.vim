@@ -1,5 +1,6 @@
 " General
-set number             " Show line numbers
+" set relativenumber             " Show line numbers
+set relativenumber     " Show relative line numbers
 set linebreak          " Break lines at word (requires Wrap lines)
 set showbreak=+++      " Wrap-broken line prefix
 set textwidth=100      " Line wrap (number of cols)
@@ -38,6 +39,11 @@ vnoremap <leader>p "+p
 vnoremap <leader>P "+P
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
+
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+nnoremap <C-h> <C-w>h
 
 set background=dark
 colorscheme gruvbox
