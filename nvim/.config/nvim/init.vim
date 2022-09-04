@@ -1,5 +1,5 @@
 " General
-" set relativenumber             " Show line numbers
+set number             " Show line numbers
 set relativenumber     " Show relative line numbers
 set linebreak          " Break lines at word (requires Wrap lines)
 set showbreak=+++      " Wrap-broken line prefix
