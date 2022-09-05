@@ -46,5 +46,11 @@ vim.keymap.set("n", "<C-l>", "<C-w>l")
 vim.keymap.set("n", "<C-h>", "<C-w>h")
 
 vim.g.tokyonight_style = "storm"
-vim.g.background = "dark"
+-- vim.g.background = "dark"
+vim.g.tokyonight_colors = { border = "#7d7d7d" }
 vim.cmd([[colorscheme tokyonight]])
+
+-- folding? haven't figured this out yet
+-- vim.opt.foldlevel = 20
+-- vim.opt.foldmethod = "expr"
+-- vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
