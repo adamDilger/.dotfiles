@@ -48,6 +48,7 @@ return require("packer").startup(function(use)
 	})
 
 	use({ "ellisonleao/gruvbox.nvim" })
+	use({ "folke/tokyonight.nvim" })
 
 	use({
 		"nvim-lualine/lualine.nvim",

@@ -69,7 +69,7 @@ require("lspconfig")["tailwindcss"].setup({
 
 -- default to volars ts server, as vue projects are more common than ts ones
 if not _PROJECT.LSP_SKIP_VOLAR then
-	require("plugins.lsp-volar").setupVolar(base_on_attach, capabilities)
+	require("languages.vue").setupVolar(base_on_attach, capabilities)
 elseif not _PROJECT.LSP_SKIP_TSSERVER then
 	require("lspconfig")["tsserver"].setup({
 		on_attach = base_on_attach,

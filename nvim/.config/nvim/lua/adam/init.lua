@@ -1,17 +1,10 @@
+require("adam.set")
+
 _PROJECT = {}
 require("nvim-projectconfig").setup()
 
 require("adam.globals")
-require("adam.plugins")
-
-require("plugins.lsp")
-require("plugins.cmp")
-require("plugins.treesitter")
-require("plugins.telescope")
-require("plugins.nvim-tree")
-require("plugins.lualine")
-require("plugins.dap")
-require("plugins.null-ls")
+require("adam.packer")
 
 require("languages.go")
 require("languages.lua")
