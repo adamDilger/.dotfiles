@@ -61,10 +61,12 @@ require("lspconfig")["gopls"].setup({
 	capabilities = capabilities,
 })
 
-require("lspconfig")["tailwindcss"].setup({
-	on_attach = base_on_attach,
-	capabilities = capabilities,
-})
+if not _PROJECT.LSP_SKIP_TAILWIND then
+	require("lspconfig")["tailwindcss"].setup({
+		on_attach = base_on_attach,
+		capabilities = capabilities,
+	})
+end
 
 -- default to volars ts server, as vue projects are more common than ts ones
 if not _PROJECT.LSP_SKIP_VOLAR then
