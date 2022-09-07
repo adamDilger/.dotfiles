@@ -7,7 +7,7 @@ local sources = {
 }
 
 if not _PROJECT.NULL_LS_SKIP_ESLINT then
-	table.insert(sources, null_ls.builtins.formatting.eslint_d)
+	table.insert(sources, null_ls.builtins.diagnostics.eslint_d)
 end
 
 null_ls.setup({ sources = sources })
