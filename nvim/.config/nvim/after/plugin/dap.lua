@@ -20,7 +20,28 @@ vim.keymap.set("n", "<Leader>dc", "<Cmd>lua require('dap').terminate()<CR>", opt
 -- vim.keymap.set("<Leader>dr", "<Cmd>lua require'dap'.repl.open()<CR>", opts)
 -- vim.keymap.set("<Leader>dl", "<Cmd>lua require'dap'.run_last()<CR>", opts)
 
-dapui.setup({})
+dapui.setup({
+	layouts = {
+		{
+			elements = {
+				-- Elements can be strings or table with id and size keys.
+				{ id = "scopes", size = 0.30 },
+				"breakpoints",
+				"stacks",
+				"watches",
+			},
+			size = 40,
+			position = "left",
+		},
+		{
+			elements = {
+				"console",
+			},
+			size = 0.30,
+			position = "bottom",
+		},
+	},
+})
 dap.listeners.after.event_initialized["dapui_config"] = function()
 	dapui.open()
 	vim.keymap.set("n", "E", "<Cmd>lua require('dapui').eval()<CR>")

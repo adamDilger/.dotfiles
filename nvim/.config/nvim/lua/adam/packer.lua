@@ -18,6 +18,7 @@ return require("packer").startup(function(use)
 			"nvim-neotest/neotest-go",
 		},
 	})
+	use("mfussenegger/nvim-jdtls")
 
 	use("windwp/nvim-projectconfig")
 
