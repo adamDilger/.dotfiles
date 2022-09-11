@@ -47,10 +47,13 @@ dap.listeners.after.event_initialized["dapui_config"] = function()
 	vim.keymap.set("n", "E", "<Cmd>lua require('dapui').eval()<CR>")
 end
 dap.listeners.before.event_terminated["dapui_config"] = function()
-	dapui.close()
-	vim.keymap.del("n", "E")
+	-- dapui.close()
+	-- vim.keymap.del("n", "E")
 end
 dap.listeners.before.event_exited["dapui_config"] = function()
-	dapui.close()
-	vim.keymap.del("n", "E")
+	-- dapui.close()
+	-- vim.keymap.del("n", "E")
 end
+
+vim.api.nvim_create_user_command("DO", require("dapui").open, {})
+vim.api.nvim_create_user_command("DC", require("dapui").close, {})

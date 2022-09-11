@@ -1,6 +1,8 @@
 require("adam.set")
 
-_PROJECT = {}
+_PROJECT = {
+	java = {},
+}
 require("nvim-projectconfig").setup()
 
 require("adam.globals")
