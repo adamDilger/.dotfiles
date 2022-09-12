@@ -18,18 +18,19 @@ local JDTLS_LOCATION = home .. "/.local/share/nvim/mason/packages/jdtls"
 local JAVA_DEBUG_LOCATION = home .. "/.local/share/nvim/lsp_servers/java-debug"
 local LOMBOK_JAR_LOCATION = home .. "/.vscode/extensions/gabrielbb.vscode-lombok-1.0.1/server/lombok.jar"
 local WORKSPACE_PATH = home .. "/workspace/"
-local FORMATTER_XML_LOCATION = home .. "/dev/geometry/standards/eclipse/GeometryFormatter.xml"
 
 if vim.fn.has("mac") == 1 then
 	CONFIG = "mac"
 	JAVA_BIN = "/Library/Java/JavaVirtualMachines/temurin-18.jdk/Contents/Home/bin/java"
 	JAVA_11_HOME = "/Library/Java/JavaVirtualMachines/temurin-11.jdk/Contents/Home/bin/java"
 	JAVA_17_HOME = "/Library/Java/JavaVirtualMachines/temurin-18.jdk/Contents/Home/bin/java"
+	FORMATTER_XML_LOCATION = home .. "/geo/geometry/standards/eclipse/GeometryFormatter.xml"
 elseif vim.fn.has("unix") == 1 then
 	CONFIG = "linux"
 	JAVA_BIN = "/usr/lib/jvm/temurin-17-jdk-amd64/bin/java"
 	JAVA_11_HOME = "/usr/lib/jvm/temurin-11-jdk-amd64"
 	JAVA_17_HOME = "/usr/lib/jvm/temurin-17-jdk-amd64"
+	FORMATTER_XML_LOCATION = home .. "/dev/geometry/standards/eclipse/GeometryFormatter.xml"
 else
 	print("Unsupported system")
 	return

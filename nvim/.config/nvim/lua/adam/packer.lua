@@ -4,6 +4,7 @@ return require("packer").startup(function(use)
 	use("neovim/nvim-lspconfig")
 	use({ "williamboman/mason.nvim" })
 	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
+	use("nvim-treesitter/playground")
 	use("thehamsta/nvim-dap-virtual-text")
 	use({
 		"jose-elias-alvarez/null-ls.nvim",
