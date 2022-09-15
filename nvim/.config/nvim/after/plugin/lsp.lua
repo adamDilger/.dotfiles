@@ -58,7 +58,7 @@ require("lspconfig")["gopls"].setup({
 	capabilities = capabilities,
 })
 
-if not _PROJECT.LSP_SKIP_TAILWIND then
+if _PROJECT.TAILWIND then
 	require("lspconfig")["tailwindcss"].setup({
 		on_attach = base_on_attach,
 		capabilities = capabilities,
@@ -66,9 +66,9 @@ if not _PROJECT.LSP_SKIP_TAILWIND then
 end
 
 -- default to volars ts server, as vue projects are more common than ts ones
-if not _PROJECT.LSP_SKIP_VOLAR then
+if _PROJECT.VOLAR then
 	require("languages.vue").setupVolar(base_on_attach, capabilities)
-elseif not _PROJECT.LSP_SKIP_TSSERVER then
+elseif _PROJECT.TS_SERVER then
 	require("lspconfig")["tsserver"].setup({
 		on_attach = base_on_attach,
 		capabilities = capabilities,
@@ -86,3 +86,19 @@ require("lspconfig")["sumneko_lua"].setup({
 		},
 	},
 })
+
+if _PROJECT.EMMET then
+	require("lspconfig").emmet_ls.setup({
+		-- on_attach = on_attach,
+		capabilities = capabilities,
+		filetypes = { "html", "freemarker", "vue" },
+		-- init_options = {
+		-- 	html = {
+		-- 		options = {
+		-- 			-- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
+		-- 			["bem.enabled"] = true,
+		-- 		},
+		-- 	},
+		-- },
+	})
+end

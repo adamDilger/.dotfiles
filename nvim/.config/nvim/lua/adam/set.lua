@@ -3,7 +3,7 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.linebreak = true
 vim.opt.showbreak = "+++"
-vim.opt.textwidth = 100
+vim.opt.textwidth = 0
 vim.opt.showmatch = true
 vim.opt.visualbell = true
 

@@ -10,3 +10,5 @@ require("adam.packer")
 
 require("languages.go")
 require("languages.lua")
+
+vim.keymap.set("n", "s", "<cmd>echo 'SAVE'<cr>")

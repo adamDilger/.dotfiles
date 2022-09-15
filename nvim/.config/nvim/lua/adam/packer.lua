@@ -9,6 +9,7 @@ return require("packer").startup(function(use)
 	use({
 		"jose-elias-alvarez/null-ls.nvim",
 		requires = { "nvim-lua/plenary.nvim" },
+		commit = "bf027826eeb83606ef7153f312ef66750ef14961"
 	})
 	use({
 		"nvim-neotest/neotest",
@@ -46,6 +47,8 @@ return require("packer").startup(function(use)
 		end,
 	})
 
+	use("lukas-reineke/indent-blankline.nvim")
+
 	use({
 		"kyazdani42/nvim-tree.lua",
 		requires = { "kyazdani42/nvim-web-devicons" },
@@ -68,4 +71,5 @@ return require("packer").startup(function(use)
 	use("nvim-lua/lsp-status.nvim")
 	use("github/copilot.vim")
 	use("voldikss/vim-floaterm")
+	use("numToStr/Comment.nvim")
 end)
