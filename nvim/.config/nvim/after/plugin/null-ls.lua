@@ -9,7 +9,7 @@ if _PROJECT.PRETTIER then
 	table.insert(sources, null_ls.builtins.formatting.prettierd)
 end
 
-if _PROJECT.ESLINT then
+if _PROJECT.ES_LINT then
 	table.insert(sources, null_ls.builtins.diagnostics.eslint_d)
 end
 

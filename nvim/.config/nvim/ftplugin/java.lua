@@ -1,8 +1,10 @@
 -- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
 
-local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
+if not _PROJECT.java.ENABLED then
+	return
+end
 
-require("dap").set_log_level("DEBUG")
+local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 
 local augroup = vim.api.nvim_create_augroup("LspFormattingJava", {})
 local function lsp_formatting()
