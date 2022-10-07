@@ -45,14 +45,11 @@ vim.keymap.set("n", "<C-k>", "<C-w>k")
 vim.keymap.set("n", "<C-l>", "<C-w>l")
 vim.keymap.set("n", "<C-h>", "<C-w>h")
 
-vim.g.tokyonight_style = "storm"
-vim.g.background = "dark"
-require("tokyonight").setup({
-	on_colors = function(colors)
-		colors.border = "gray"
-	end,
+require("gruvbox").setup({
+  contrast = "hard"
 })
-vim.cmd([[colorscheme tokyonight]])
+
+vim.cmd([[colorscheme gruvbox]])
 
 -- folding? haven't figured this out yet
 -- vim.opt.foldlevel = 20

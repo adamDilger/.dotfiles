@@ -9,7 +9,7 @@ return require("packer").startup(function(use)
 	use({
 		"jose-elias-alvarez/null-ls.nvim",
 		requires = { "nvim-lua/plenary.nvim" },
-		commit = "bf027826eeb83606ef7153f312ef66750ef14961"
+		-- commit = "bf027826eeb83606ef7153f312ef66750ef14961"
 	})
 	use({
 		"nvim-neotest/neotest",
@@ -42,6 +42,7 @@ return require("packer").startup(function(use)
 	use({
 		"lewis6991/gitsigns.nvim",
 		requires = { "nvim-lua/plenary.nvim" },
+		commit = "a0cd6ccd73f0cc1d17bfb8be4c39a1dccd5ff757",
 		config = function()
 			require("gitsigns").setup()
 		end,
