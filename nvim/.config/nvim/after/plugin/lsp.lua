@@ -38,7 +38,7 @@ local base_on_attach = function(client, bufnr)
 	vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
 
 	-- add to your shared on_attach callback
-	if client.supports_method("textDocument/formatting") then
+	if client.supports_method("textDocument/formatting") or (client.name == "volar" and _PROJECT.PRETTIER) then
 		vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
 		vim.api.nvim_create_autocmd("BufWritePre", {
 			group = augroup,
@@ -67,7 +67,12 @@ end
 
 -- default to volars ts server, as vue projects are more common than ts ones
 if _PROJECT.VOLAR then
-	require("languages.vue").setupVolar(base_on_attach, capabilities)
+	-- require("languages.vue").setupVolar(base_on_attach, capabilities)
+	require("lspconfig")["volar"].setup({
+		on_attach = base_on_attach,
+		capabilities = capabilities,
+		filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
+	})
 elseif _PROJECT.TS_SERVER then
 	require("lspconfig")["tsserver"].setup({
 		on_attach = base_on_attach,
