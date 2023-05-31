@@ -8,6 +8,10 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
+
+# Set PATH, MANPATH, etc., for Homebrew.
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
   setxkbmap -option caps:escape;
 fi

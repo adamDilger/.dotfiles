@@ -52,7 +52,7 @@ local base_on_attach = function(client, bufnr)
 end
 
 -- Setup lspconfig for nvim-cmp
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
+local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 require("lspconfig")["gopls"].setup({
 	on_attach = base_on_attach,
@@ -88,9 +88,6 @@ elseif _PROJECT.DENO then
 	require("lspconfig")["denols"].setup({
 		on_attach = base_on_attach,
 		capabilities = capabilities,
-		init_options = {
-			lint = true,
-		},
 	})
 else
 	require("lspconfig")["tsserver"].setup({
@@ -98,6 +95,16 @@ else
 		capabilities = capabilities,
 	})
 end
+
+require("lspconfig")["astro"].setup({
+	on_attach = base_on_attach,
+	capabilities = capabilities,
+})
+
+require("lspconfig")["rust_analyzer"].setup({
+	on_attach = base_on_attach,
+	capabilities = capabilities,
+})
 
 require("lspconfig")["lua_ls"].setup({
 	on_attach = base_on_attach,
