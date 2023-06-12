@@ -30,10 +30,14 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   alias ls="ls -hlG"
 fi
 
-# ctrl+x e functionality
+# ------ BASH functionality --------
+# ctrl+x e
 autoload edit-command-line
 zle -N edit-command-line
 bindkey '^Xe' edit-command-line
+# ctrl+p/n
+bindkey "^P" up-line-or-search
+bindkey "^N" down-line-or-search
 
 alias grep="grep --color=auto"
 alias gs="git status"

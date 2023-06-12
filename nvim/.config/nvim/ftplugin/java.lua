@@ -12,7 +12,7 @@ local function lsp_formatting()
 	vim.lsp.buf.format()
 end
 
-local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local root_dir = require("jdtls.setup").find_root({ ".git", "mvnw", "gradlew" })
 
 local home = os.getenv("HOME")

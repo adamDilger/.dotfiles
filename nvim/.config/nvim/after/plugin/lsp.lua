@@ -32,6 +32,7 @@ local base_on_attach = function(client, bufnr)
 	vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, bufopts)
 	vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, bufopts)
 	vim.keymap.set("v", "<leader>la", vim.lsp.buf.code_action, bufopts)
+	vim.keymap.set("n", "<leader>le", vim.diagnostic.open_float, bufopts)
 	vim.keymap.set("n", "<leader>lf", function()
 		lsp_formatting(bufnr)
 	end, bufopts)
@@ -51,7 +52,7 @@ local base_on_attach = function(client, bufnr)
 end
 
 -- Setup lspconfig for nvim-cmp
-local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 require("lspconfig")["gopls"].setup({
 	on_attach = base_on_attach,
@@ -65,6 +66,16 @@ if _PROJECT.TAILWIND then
 	})
 end
 
+require("lspconfig")["astro"].setup({
+	on_attach = base_on_attach,
+	capabilities = capabilities,
+})
+
+require("lspconfig")["rust_analyzer"].setup({
+	on_attach = base_on_attach,
+	capabilities = capabilities,
+})
+
 -- default to volars ts server, as vue projects are more common than ts ones
 if _PROJECT.VOLAR then
 	-- require("languages.vue").setupVolar(base_on_attach, capabilities)
@@ -73,14 +84,22 @@ if _PROJECT.VOLAR then
 		capabilities = capabilities,
 		filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
 	})
-elseif _PROJECT.TS_SERVER then
+elseif _PROJECT.DENO then
+	require("lspconfig")["denols"].setup({
+		on_attach = base_on_attach,
+		capabilities = capabilities,
+		init_options = {
+			lint = true,
+		},
+	})
+else
 	require("lspconfig")["tsserver"].setup({
 		on_attach = base_on_attach,
 		capabilities = capabilities,
 	})
 end
 
-require("lspconfig")["sumneko_lua"].setup({
+require("lspconfig")["lua_ls"].setup({
 	on_attach = base_on_attach,
 	capabilities = capabilities,
 	settings = {
