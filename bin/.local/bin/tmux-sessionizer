@@ -1,8 +1,12 @@
 #!/usr/bin/env bash
+
 if [[ $# -eq 1 ]]; then
-    selected=$1
-else
-    selected=$(cat ~/.config/project_dirs.txt | fzf)
+  selected=$1
+elif test -f ~/.config/project_dirs.sh; then
+	# ls -l -d ~/dev/* ~/geo/*/* ~/geo/geometry/gep/* | awk '{print $9}'
+	selected=$(~/.config/project_dirs.sh | fzf)
+elif test -f ~/.config/project_dirs.txt; then
+  selected=$(cat ~/.config/project_dirs.txt | fzf)
 fi
 
 if [[ -z $selected ]]; then
