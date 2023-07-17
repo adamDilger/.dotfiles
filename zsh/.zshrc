@@ -2,6 +2,9 @@
 # parse_git_branch() {
 #     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 # }
+
+PATH=/opt/homebrew/bin:$PATH
+
 autoload -Uz vcs_info
 precmd() { vcs_info }
 
@@ -30,12 +33,11 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   alias ls="ls -hlG"
 fi
 
-# ------ BASH functionality --------
-# ctrl+x e
+# ctrl+x e functionality
 autoload edit-command-line
 zle -N edit-command-line
 bindkey '^Xe' edit-command-line
-# ctrl+p/n
+
 bindkey "^P" up-line-or-search
 bindkey "^N" down-line-or-search
 
@@ -45,6 +47,7 @@ alias gt="git log --graph --decorate --oneline --all "
 alias gto="git log --graph --decorate --oneline"
 alias lg="lazygit"
 alias json='python3 -mjson.tool'
+alias vim='nvim'
 
 export EDITOR=vim
 
