@@ -134,12 +134,12 @@ require("lazy").setup({
           require("gitsigns").next_hunk,
           { buffer = bufnr, desc = "[G]o to [N]ext Hunk" }
         )
-        vim.keymap.set(
-          "n",
-          "<leader>ph",
-          require("gitsigns").preview_hunk,
-          { buffer = bufnr, desc = "[P]review [H]unk" }
-        )
+        -- vim.keymap.set(
+        --   "n",
+        --   "<leader>ph",
+        --   require("gitsigns").preview_hunk,
+        --   { buffer = bufnr, desc = "[P]review [H]unk" }
+        -- )
       end,
     },
   },
@@ -213,6 +213,7 @@ require("lazy").setup({
   -- require 'kickstart.plugins.debug',
 
   require("adam.nvimtree"),
+  require("adam.neoformat"),
   -- require("adam.null-ls"),
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
@@ -229,7 +230,8 @@ require("lazy").setup({
 -- NOTE: You can change these options as you wish!
 
 vim.o.tabstop = 2
-vim.o.noexpandtab = true
+vim.o.shiftwidth = 2
+vim.o.expandtab = false
 
 -- Set highlight on search
 vim.o.hlsearch = false
