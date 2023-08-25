@@ -216,6 +216,9 @@ require("lazy").setup({
 	require("adam.neoformat"),
 	-- require("adam.null-ls"),
 
+	-- ZEN mode
+	{ "folke/zen-mode.nvim" },
+
 	-- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
 	--    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
 	--    up-to-date with whatever is in the kickstart repo.
@@ -459,10 +462,12 @@ local lspconfig = require("lspconfig")
 local servers = {
 	gopls = {},
 	eslint = {},
-	volar = {},
+	volar = {
+		filetypes = { "typescript", "javascript", "vue", "json" },
+	},
 	tsserver = {
 		root_dir = lspconfig.util.root_pattern("package.json"),
-		single_file_support = false,
+		single_file_support = true,
 	},
 	denols = {
 		root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
@@ -480,6 +485,8 @@ local servers = {
 
 -- Setup neovim lua configuration
 require("neodev").setup()
+
+require("adam.volar-takeover").enableTakoverMode()
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
