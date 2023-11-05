@@ -172,9 +172,9 @@ require("lazy").setup({
 		"lukas-reineke/indent-blankline.nvim",
 		-- Enable `lukas-reineke/indent-blankline.nvim`
 		-- See `:help indent_blankline.txt`
+		main = "ibl",
 		opts = {
-			char = "┊",
-			show_trailing_blankline_indent = false,
+			indent = { char = "┊" },
 		},
 	},
 
@@ -212,6 +212,7 @@ require("lazy").setup({
 	-- require 'kickstart.plugins.autoformat',
 	-- require 'kickstart.plugins.debug',
 
+	"github/copilot.vim",
 	require("adam.nvimtree"),
 	require("adam.neoformat"),
 	-- require("adam.null-ls"),
@@ -231,6 +232,10 @@ require("lazy").setup({
 -- [[ Setting options ]]
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
+--
+vim.g.copilot_filetypes = {
+	["*"] = true,
+}
 
 vim.o.tabstop = 2
 vim.o.shiftwidth = 2
@@ -244,6 +249,7 @@ vim.o.hlsearch = false
 
 -- Make line numbers default
 vim.wo.number = true
+vim.wo.relativenumber = true
 
 -- Enable mouse mode
 vim.o.mouse = "a"
@@ -255,6 +261,7 @@ vim.o.mouse = "a"
 
 -- Enable break indent
 vim.o.breakindent = true
+vim.o.showbreak = "+++"
 
 vim.keymap.set("v", "<space>y", '"*y', { silent = true })
 vim.keymap.set("n", "<space>p", '"*p', { silent = true })
@@ -540,30 +547,33 @@ cmp.setup({
 			behavior = cmp.ConfirmBehavior.Replace,
 			select = true,
 		}),
-		["<Tab>"] = cmp.mapping(function(fallback)
-			if cmp.visible() then
-				cmp.select_next_item()
-			elseif luasnip.expand_or_locally_jumpable() then
-				luasnip.expand_or_jump()
-			else
-				fallback()
-			end
-		end, { "i", "s" }),
-		["<S-Tab>"] = cmp.mapping(function(fallback)
-			if cmp.visible() then
-				cmp.select_prev_item()
-			elseif luasnip.locally_jumpable(-1) then
-				luasnip.jump(-1)
-			else
-				fallback()
-			end
-		end, { "i", "s" }),
+		-- ["<Tab>"] = cmp.mapping(function(fallback)
+		-- 	if cmp.visible() then
+		-- 		cmp.select_next_item()
+		-- 	elseif luasnip.expand_or_locally_jumpable() then
+		-- 		luasnip.expand_or_jump()
+		-- 	else
+		-- 		fallback()
+		-- 	end
+		-- end, { "i", "s" }),
+		-- ["<S-Tab>"] = cmp.mapping(function(fallback)
+		-- 	if cmp.visible() then
+		-- 		cmp.select_prev_item()
+		-- 	elseif luasnip.locally_jumpable(-1) then
+		-- 		luasnip.jump(-1)
+		-- 	else
+		-- 		fallback()
+		-- 	end
+		-- end, { "i", "s" }),
 	}),
 	sources = {
 		{ name = "nvim_lsp" },
 		{ name = "luasnip" },
 	},
 })
+
+-- pascal case to snake case func
+-- %s/\<\u\|\l\u/\= join(split(tolower(submatch(0)), '\zs'), '_')/gc
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

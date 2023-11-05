@@ -25,6 +25,7 @@ PATH="$PATH:$HOME/scripts/";
 # bash history (unlimited)
 # HISTSIZE=
 # HISTFILESIZE=
+export HISTSIZE=10000
 
 #alias
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
