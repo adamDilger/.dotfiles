@@ -470,11 +470,26 @@ local servers = {
 	gopls = {},
 	eslint = {},
 	volar = {
+		root_dir = lspconfig.util.root_pattern("package.json"),
 		filetypes = { "typescript", "javascript", "vue", "json" },
 	},
 	tsserver = {
 		root_dir = lspconfig.util.root_pattern("package.json"),
 		single_file_support = true,
+		init_options = {
+			plugins = {
+				{
+					name = "@vue/typescript-plugin",
+					location = vim.env.FNM_MULTISHELL_PATH .. "/lib/node_modules/@vue/typescript-plugin",
+					languages = { "javascript", "typescript", "vue" },
+				},
+			},
+		},
+		filetypes = {
+			"javascript",
+			"typescript",
+			"vue",
+		},
 	},
 	denols = {
 		root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
@@ -493,7 +508,7 @@ local servers = {
 -- Setup neovim lua configuration
 require("neodev").setup()
 
-require("adam.volar-takeover").enableTakoverMode()
+-- require("adam.volar-takeover").enableTakoverMode()
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()

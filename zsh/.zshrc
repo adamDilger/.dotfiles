@@ -50,7 +50,7 @@ alias lg="lazygit"
 alias json='python3 -mjson.tool'
 alias vim='nvim'
 
-export EDITOR=vim
+export EDITOR=nvim
 
 # zsh completions
 if type brew &>/dev/null; then
