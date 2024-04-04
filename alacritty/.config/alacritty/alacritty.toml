@@ -1,0 +1,13 @@
+[colors.bright]
+green = "#9ade40"
+red = "#e63037"
+
+[font]
+size = 16.0
+
+[font.normal]
+family = "Hack Nerd Font Mono"
+
+[window.padding]
+x = 5
+y = 5
