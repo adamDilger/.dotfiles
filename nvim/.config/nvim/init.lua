@@ -466,6 +466,10 @@ local lspconfig = require("lspconfig")
 --
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
+
+-- if vue project, set the vue typescript plugin for the tsserver
+local is_vue_project = require("lspconfig").util.path.exists("node_modules/@vue") == "directory"
+
 local servers = {
 	gopls = {},
 	eslint = {},
@@ -477,13 +481,13 @@ local servers = {
 		root_dir = lspconfig.util.root_pattern("package.json"),
 		single_file_support = true,
 		init_options = {
-			plugins = {
+			plugins = is_vue_project and {
 				{
 					name = "@vue/typescript-plugin",
 					location = vim.env.FNM_MULTISHELL_PATH .. "/lib/node_modules/@vue/typescript-plugin",
 					languages = { "javascript", "typescript", "vue" },
 				},
-			},
+			} or nil,
 		},
 		filetypes = {
 			"javascript",
