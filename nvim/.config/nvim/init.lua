@@ -134,12 +134,12 @@ require("lazy").setup({
 					require("gitsigns").next_hunk,
 					{ buffer = bufnr, desc = "[G]o to [N]ext Hunk" }
 				)
-				-- vim.keymap.set(
-				--   "n",
-				--   "<leader>ph",
-				--   require("gitsigns").preview_hunk,
-				--   { buffer = bufnr, desc = "[P]review [H]unk" }
-				-- )
+				vim.keymap.set(
+					"n",
+					"<leader>gh",
+					require("gitsigns").preview_hunk,
+					{ buffer = bufnr, desc = "[P]review [H]unk" }
+				)
 			end,
 		},
 	},
@@ -435,6 +435,11 @@ local on_attach = function(_, bufnr)
 	nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
 
 	nmap("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
+	nmap("gvd", function()
+		vim.cmd("vsplit")
+		vim.lsp.buf.definition()
+	end, "[G]oto [v]split [D]efinition")
+
 	nmap("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
 	nmap("gI", vim.lsp.buf.implementation, "[G]oto [I]mplementation")
 	nmap("<leader>D", vim.lsp.buf.type_definition, "Type [D]efinition")
