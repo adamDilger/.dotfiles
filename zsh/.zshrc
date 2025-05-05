@@ -51,6 +51,7 @@ alias json='python3 -mjson.tool'
 alias vim='nvim'
 
 export EDITOR=nvim
+export XDG_CONFIG_HOME="$HOME/.config"
 
 # zsh completions
 if type brew &>/dev/null; then

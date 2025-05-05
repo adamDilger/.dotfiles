@@ -1,15 +1,9 @@
 -- debug.lua
 --
 -- Shows how to use the DAP plugin to debug your code.
---
--- Primarily focused on configuring the debugger for Go, but can
--- be extended to other languages as well. That's why it's called
--- kickstart.nvim and not kitchen-sink.nvim ;)
 
 return {
-	-- NOTE: Yes, you can install new plugins here!
 	"mfussenegger/nvim-dap",
-	-- NOTE: And you can specify dependencies as well
 	dependencies = {
 		-- Creates a beautiful debugger UI
 		"rcarriga/nvim-dap-ui",
@@ -29,6 +23,7 @@ return {
 		{
 			"<F5>",
 			function()
+				require("dapui").open({ layout = 1 })
 				require("dap").continue()
 			end,
 			desc = "Debug: Start/Continue",
@@ -72,15 +67,26 @@ return {
 		{
 			"<F7>",
 			function()
-				require("dapui").toggle()
+				require("dapui").toggle({ layout = 1 })
 			end,
 			desc = "Debug: See last session result.",
 		},
+		{
+			"<F8>",
+			function()
+				require("dapui").toggle({ layout = 2 })
+			end,
+			desc = "Debug: See last session result.",
+		},
+		{
+			"<F12>",
+			function()
+				require("dapui").eval()
+			end,
+			desc = "Debug: Evaluate under cursor",
+		},
 	},
 	config = function()
-		local dap = require("dap")
-		local dapui = require("dapui")
-
 		require("mason-nvim-dap").setup({
 			-- Makes a best effort to setup the various debuggers with
 			-- reasonable debug configurations
@@ -100,12 +106,14 @@ return {
 
 		-- Dap UI setup
 		-- For more information, see |:help nvim-dap-ui|
+		local dapui = require("dapui")
 		dapui.setup({
 			-- Set icons to characters that are more likely to work in every terminal.
 			--    Feel free to remove or use ones that you like more! :)
 			--    Don't feel like these are good choices.
 			icons = { expanded = "▾", collapsed = "▸", current_frame = "*" },
 			controls = {
+				enabled = true,
 				element = "console",
 				icons = {
 					pause = "⏸",
@@ -122,20 +130,20 @@ return {
 			layouts = {
 				{
 					elements = {
+						{ id = "console", size = 1 },
+					},
+					position = "bottom",
+					size = 5,
+				},
+				{
+					elements = {
 						{ id = "scopes", size = 0.25 },
 						{ id = "breakpoints", size = 0.25 },
 						{ id = "stacks", size = 0.25 },
 						{ id = "watches", size = 0.25 },
 					},
-					position = "left",
-					size = 30,
-				},
-				{
-					elements = {
-						{ id = "console", size = 1 },
-					},
-					position = "bottom",
-					size = 5,
+					position = "right",
+					size = 40,
 				},
 			},
 		})
@@ -165,9 +173,9 @@ return {
 			vim.fn.sign_define(tp, { text = icon, texthl = hl, numhl = hl })
 		end
 
-		dap.listeners.after.event_initialized["dapui_config"] = dapui.open
-		dap.listeners.before.event_terminated["dapui_config"] = dapui.close
-		dap.listeners.before.event_exited["dapui_config"] = dapui.close
+		-- dap.listeners.after.event_initialized["dapui_config"] = dapui.open
+		-- dap.listeners.before.event_terminated["dapui_config"] = dapui.close
+		-- dap.listeners.before.event_exited["dapui_config"] = dapui.close
 
 		-- Install golang specific config
 		require("adam.dap.node-dap")
