@@ -4,12 +4,12 @@ if [[ $# -eq 1 ]]; then
   selected=$1
 elif test -f ~/.config/project_dirs.sh; then
 	# ls -l -d ~/dev/* ~/geo/*/* ~/geo/geometry/gep/* | awk '{print $9}'
+	# find ~/dev ~/dev/geo -type d -depth 1 -prune
 	selected=$(~/.config/project_dirs.sh | fzf)
-elif test -f ~/.config/project_dirs.txt; then
-  selected=$(cat ~/.config/project_dirs.txt | fzf)
 fi
 
 if [[ -z $selected ]]; then
+    echo "No directory selected"
     exit 0
 fi
 
