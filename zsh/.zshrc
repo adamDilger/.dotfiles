@@ -56,6 +56,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 # zsh completions
 if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
   autoload -Uz compinit
   compinit
 fi
@@ -71,4 +72,4 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-eval "$(fnm env --use-on-cd)"
+eval "$(fnm env --use-on-cd --shell zsh)"
