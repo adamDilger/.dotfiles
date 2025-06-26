@@ -57,6 +57,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
   FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+  FPATH=$HOME/.local/share/zsh-completions:$FPATH
   autoload -Uz compinit
   compinit
 fi
