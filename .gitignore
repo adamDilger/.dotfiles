@@ -2,3 +2,4 @@
 nvim/.config/nvim/plugin/packer_compiled.lua
 nvim/.config/nvim/projects
 bin/.local
+tmux/.config/tmux/plugins
