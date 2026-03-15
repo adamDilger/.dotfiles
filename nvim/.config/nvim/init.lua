@@ -1,5 +1,5 @@
 --[[
-
+! curl https://raw.githubusercontent.com/nvim-lua/kickstart.nvim/refs/heads/master/init.lua > /tmp/kickstart.lua
 =====================================================================
 ==================== READ THIS BEFORE CONTINUING ====================
 =====================================================================
@@ -148,7 +148,7 @@ vim.o.splitbelow = true
 --  Notice listchars is set using `vim.opt` instead of `vim.o`.
 --  It is very similar to `vim.o` but offers an interface for conveniently interacting with tables.
 --   See `:help lua-options`
---   and `:help lua-options-guide`
+--   and `:help lua-guide-options`
 vim.o.list = true
 vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
@@ -156,7 +156,7 @@ vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 vim.o.inccommand = "split"
 
 -- Show which line your cursor is on
--- vim.o.cursorline = true
+vim.o.cursorline = false
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.o.scrolloff = 10
@@ -326,7 +326,7 @@ require("lazy").setup({
 			spec = {
 				{ "<leader>s", group = "[S]earch", mode = { "n", "v" } },
 				{ "<leader>t", group = "[T]oggle" },
-				{ "<leader>h", group = "Git [H]unk", mode = { "n", "v" } },
+				{ "<leader>h", group = "Git [H]unk", mode = { "n", "v" } }, -- Enable gitsigns recommended keymaps first
 				{ "gr", group = "LSP Actions", mode = { "n" } },
 			},
 		},
@@ -350,7 +350,7 @@ require("lazy").setup({
 		-- Note: If you customize your config for yourself,
 		-- it’s best to remove the Telescope plugin config entirely
 		-- instead of just disabling it here, to keep your config clean.
-		enabled = false,
+		enabled = true,
 		event = "VimEnter",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
@@ -482,13 +482,13 @@ require("lazy").setup({
 			})
 
 			-- Override default behavior and theme when searching
-			vim.keymap.set("n", "<leader>/", function()
-				-- You can pass additional configuration to Telescope to change the theme, layout, etc.
-				builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
-					winblend = 10,
-					previewer = false,
-				}))
-			end, { desc = "[/] Fuzzily search in current buffer" })
+			-- vim.keymap.set("n", "<leader>/", function()
+			-- 	-- You can pass additional configuration to Telescope to change the theme, layout, etc.
+			-- 	builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+			-- 		winblend = 10,
+			-- 		previewer = false,
+			-- 	}))
+			-- end, { desc = "[/] Fuzzily search in current buffer" })
 
 			-- It's also possible to pass additional configuration options.
 			--  See `:help telescope.builtin.live_grep()` for information about particular keys
@@ -527,9 +527,6 @@ require("lazy").setup({
 
 			-- Useful status updates for LSP.
 			{ "j-hui/fidget.nvim", opts = {} },
-
-			-- Allows extra capabilities provided by blink.cmp
-			"saghen/blink.cmp",
 		},
 		config = function()
 			-- Brief aside: **What is LSP?**
@@ -581,23 +578,6 @@ require("lazy").setup({
 					-- Execute a code action, usually your cursor needs to be on top of an error
 					-- or a suggestion from your LSP for this to activate.
 					map("gra", vim.lsp.buf.code_action, "[G]oto Code [A]ction", { "n", "x" })
-
-					--[[ TODO: is this non-telescopable?
-					-- Find references for the word under your cursor.
-					map("grr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
-
-					-- Jump to the implementation of the word under your cursor.
-					--  Useful when your language has ways of declaring types without an actual implementation.
-					map("gri", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
-
-					-- Jump to the definition of the word under your cursor.
-					--  This is where a variable was first declared, or where a function is defined, etc.
-					--  To jump back, press <C-t>.
-					map("grd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
-					map("grvd", function()
-						require("telescope.builtin").lsp_definitions({ jump_type = "vsplit" })
-					end, "[G]oto [V]ert [D]efinition")
-          --]]
 
 					-- WARN: This is not Goto Definition, this is Goto Declaration.
 					--  For example, in C this would take you to the header.
@@ -697,6 +677,17 @@ require("lazy").setup({
 					},
 				},
 
+				prettierd = {},
+				astro = {
+					init_options = {
+						typescript = {
+							tsdk = vim.fn.expand("$FNM_MULTISHELL_PATH") .. "/lib/node_modules/typescript/lib",
+						},
+					},
+				},
+
+				gopls = {},
+
 				vtsls = {
 					filetypes = {
 						"typescript",
@@ -710,6 +701,8 @@ require("lazy").setup({
 				},
 			}
 
+			print(vim.fn.expand("$FNM_MULTISHELL_PATH") .. "/lib/node_modules/typescript/lib")
+
 			-- Ensure the servers and tools above are installed
 			--
 			-- To check the current status of installed tools and/or manually install
@@ -720,8 +713,6 @@ require("lazy").setup({
 			local ensure_installed = vim.tbl_keys(servers or {})
 			vim.list_extend(ensure_installed, {
 				-- You can add other tools here that you want Mason to install
-				"stylua", -- Used to format Lua code
-				"prettierd",
 			})
 
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
@@ -771,6 +762,7 @@ require("lazy").setup({
 				-- python = { "isort", "black" },
 				--
 				-- You can use 'stop_after_first' to run the first available formatter from the list
+				astro = { "prettierd", "prettier", stop_after_first = true },
 				javascript = { "prettierd", "prettier", stop_after_first = true },
 				typescript = { "prettierd", "prettier", stop_after_first = true },
 				typescriptreact = { "prettierd", "prettier", stop_after_first = true },
