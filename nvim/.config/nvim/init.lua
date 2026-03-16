@@ -701,8 +701,6 @@ require("lazy").setup({
 				},
 			}
 
-			print(vim.fn.expand("$FNM_MULTISHELL_PATH") .. "/lib/node_modules/typescript/lib")
-
 			-- Ensure the servers and tools above are installed
 			--
 			-- To check the current status of installed tools and/or manually install
@@ -967,6 +965,9 @@ require("lazy").setup({
 				"c",
 				"diff",
 				"html",
+				"css",
+				"kotlin",
+				"java",
 				"lua",
 				"luadoc",
 				"markdown",
@@ -976,6 +977,7 @@ require("lazy").setup({
 				"vimdoc",
 				"typescript",
 				"javascript",
+				"astro",
 				"vue",
 			}
 			require("nvim-treesitter").install(parsers)
