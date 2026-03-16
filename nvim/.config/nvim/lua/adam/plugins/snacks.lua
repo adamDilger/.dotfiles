@@ -29,5 +29,12 @@ return {
 			end,
 			desc = "Smart Find Files",
 		},
+		{
+			"<leader>sg",
+			function()
+				Snacks.picker.grep()
+			end,
+			{ desc = "[S]earch by [G]rep" },
+		},
 	},
 }
