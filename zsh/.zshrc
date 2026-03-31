@@ -77,4 +77,6 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden'
 eval "$(fnm env --use-on-cd --shell zsh)"
 
 # Vite+ bin (https://viteplus.dev)
-. "$HOME/.vite-plus/env"
+if [ -f "$HOME/.vite-plus/env" ]; then
+  . "$HOME/.vite-plus/env"
+fi
