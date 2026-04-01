@@ -2,9 +2,9 @@ gui:
   showFileTree: false
 git:
   branchLogCmd: git log --oneline --graph --color=always --abbrev-commit --decorate --date=relative --all --
-  paging:
-    colorArg: always
-    pager: diff-so-fancy
+  pagers:
+    - colorArg: always
+      pager: diff-so-fancy
 customCommands:
   - key: '<c-f>'
     context: 'localBranches'
