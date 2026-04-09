@@ -1,0 +1,5 @@
+background = #0c0c0c
+
+keybind = alt+left=unbind
+keybind = alt+right=unbind
+font-feature = -calt,-liga,-dlig

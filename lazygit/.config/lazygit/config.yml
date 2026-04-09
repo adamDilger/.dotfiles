@@ -3,8 +3,11 @@ gui:
 git:
   branchLogCmd: git log --oneline --graph --color=always --abbrev-commit --decorate --date=relative --all --
   pagers:
-    - colorArg: always
-      pager: diff-so-fancy
+    # - colorArg: always
+    #   pager: diff-so-fancy
+    - pager: delta --dark --paging=never
+
+
 customCommands:
   - key: '<c-f>'
     context: 'localBranches'
