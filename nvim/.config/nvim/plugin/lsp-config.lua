@@ -178,6 +178,8 @@ local config = function()
 
 		gopls = {},
 
+		oxlint = {},
+
 		vtsls = {
 			filetypes = {
 				"typescript",
