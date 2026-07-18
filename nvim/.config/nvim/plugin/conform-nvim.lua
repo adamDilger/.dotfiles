@@ -59,7 +59,14 @@ local opts = {
 		scss = { "prettierd", "prettier", stop_after_first = true },
 		html = { "prettierd", "prettier", stop_after_first = true },
 		c = { "clangd", stop_after_first = true },
+
+		go = { "goimports", stop_after_first = true },
 	},
 }
 
 require("conform").setup(opts)
+
+-- add a Format command
+vim.api.nvim_create_user_command("Format", function(args)
+	require("conform").format({ async = not args.bang })
+end, { bang = true, desc = "Format current buffer with Conform" })
