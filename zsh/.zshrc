@@ -50,6 +50,7 @@ alias gto="git log --graph --decorate --oneline"
 alias lg="lazygit"
 alias json='python3 -mjson.tool'
 alias vim='nvim'
+alias oc='opencode'
 
 export EDITOR=nvim
 export XDG_CONFIG_HOME="$HOME/.config"
